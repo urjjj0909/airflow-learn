@@ -43,11 +43,10 @@
   
 * 若沒有設定`export AIRFLOW_HOME="$(pwd)"`就做`airflow db init`的話，那麼Airflow就會使用當初作者測試時使用的路徑，裡面會有很多的example可以供參考(也是很棒的教學參考)，但就不會有你git clone下來的repo的路徑而發生找不到[一段Airflow與資料工程的故事：談如何用Python追漫畫連載](https://leemeng.tw/a-story-about-airflow-and-data-engineering-using-how-to-use-python-to-catch-up-with-latest-comics-as-an-example.html#app-v2)中的教學檔案
 
-此外，在Airflow環境第一次建立時，會需要<username>、<password>或<email>等等的設定，就執行以下程式碼並填入即可，未來就會做為登入Airflow環境的帳號密碼：
+此外，在Airflow環境第一次建立時會需要username或password等等的設定，執行以下程式碼並填入括弧內資訊即可，未來就會作為登入Airflow環境的帳號密碼：
   
     airflow users create --role <role> --username <username> --email <email> --firstname <firstname> --lastname <lastname> --password <password>
 
 都完成後就可以執行以下程式碼看到Airflow Web UI的介面啦！
 
     airflow webserver -p 8080
-  
