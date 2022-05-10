@@ -119,7 +119,7 @@ with DAG('comic_app_v2', default_args=default_args) as dag:
     ...
 ```
 
-這代表我們在1月1號23點59分結束以後，也就是1月2號0點的時候，將1月1號所有的使用者資料做彙總。一般而言，Airflow會`在start_date`加上一個`schedule_interval`之後開始第一次執行某個DAG，而該DAG Run的execute_date為`start_date`。
+這代表我們在1月1號23點59分結束以後，也就是1月2號0點的時候，將1月1號所有的使用者資料做彙總。Airflow會`在start_date`加上一個`schedule_interval`之後開始第一次執行某個DAG，而該DAG Run的execute_date為`start_date`。
 
 ## 小結
 Airflow擅長的是管理那些允許「事件發生時間」跟「實際數據處理時間」有落差的批次工作。因此Airflow都會在`start_date`加上`schedule_interval`長度的時間過完以後，才開始處理發生在`start_date`到`start_date+schedule_interval`之間的資料。
@@ -135,28 +135,3 @@ Airflow擅長的是管理那些允許「事件發生時間」跟「實際數據�
 ## 注意事項
 * 使用Airflow前須先`cd airflow-tutorials`設定路徑、`source ~/.bashrc`載入設定再`source activate airflow-tutorials`啟動Airflow環境。`source ~/.bashrc`中必須在airflow-tutorials的路徑下執行，這樣AIRFLOW_HOME的位置才會設定對，Airflow環境啟動時才會找的到Metadata DB裡去抓資料
 * `sudo lsof -i tcp:8080`可以列出目前8080 port的使用狀態，`kill -9 <PID>`則可以刪除對應PID編號的程序
-
-## Slack App設定
-在這裡我們依照[一段Airflow與資料工程的故事：談如何用Python追漫畫連載](https://leemeng.tw/a-story-about-airflow-and-data-engineering-using-how-to-use-python-to-catch-up-with-latest-comics-as-an-example.html#app-v2)教學，同樣實作利用Slack做訊息更新的服務並以`comic_app_v3.py`作為架構去修改，改成一個追蹤Opensea感興趣NFT地板價（Floor price）的App。
-
-首先，我們需要Selenium套件去做網頁訪問，因此先執行以下指令分別安裝Selenium套件：
-
-```
-pip install selenium
-```
-
-再下載Chrome driver並解壓縮：
-
-```
-sudo apt-get install unzip
-wget -N http://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip
-```
-
-我們把解壓縮後的Chrome driver移到`/usr/local/bin`並加入`~/.bashrc`中：
-
-```
-sudo mv -f ~/chromedriver /usr/local/bin
-echp 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
-```
-
