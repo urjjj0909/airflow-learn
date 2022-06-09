@@ -67,12 +67,9 @@ airflow users create --role <role> --username <username> --email <email> --first
 airflow webserver -p 8080
 ```
 
-## 建立Airflow工作
-觀察該文中comic_app_v1和comic_app_v2的差異在哪裡，模組化是建立資料處理管線相當重要的概念。
+## 建立及測試Airflow工作
+細讀該文中comic_app_v1和comic_app_v2的差異在哪裡，且模組化是建立資料處理管線相當重要的概念，在建立Airflow tasks要將裡面寫的function獨立分開，如此一來當錯誤發生時就會止於特定function。假設你在跑一個已經建立好的Airflow資料管線時，某些function是很輕量的、而有些則是需要大計算量且須運行較長時間的，如果今天把所有資料處理邏輯都放在同一個function裡面，當其中執行任何一個輕量步驟失敗時，可能就會導致所有大計算量的步驟也得重新執行，此一來，重新再跑所耗費的成本就會很大。
 
-建立Airflow tasks要將裡面寫的function獨立分開，如此一來當錯誤發生時就會止於特定function。假設你在跑一個已經建立好的Airflow資料管線時，某些function是很輕量的、而有些則是需要大計算量且須運行較長時間的，如果今天把所有資料處理邏輯都放在同一個function裡面，當其中執行任何一個輕量步驟失敗時，可能就會導致所有大計算量的步驟也得重新執行，此一來，重新再跑所耗費的成本就會很大。
-
-## 測試Airflow工作
 在我們放心讓Airflow幫我們排程comic_app_v2 DAG以前，必須養成好習慣先分別測試裡頭所有工作，確保它們的執行結果如我們預期：
 
 ```
