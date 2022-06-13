@@ -142,7 +142,7 @@ Airflow擅長的是管理那些允許「事件發生時間」跟「實際數據�
 * 在`commic_app_v2.py`中確認邏輯流程`>>`無誤（Upstream task & Downstream task）
 * 在`commic_app_v2.py`中確認Airflow工作環境參數、訊息交換無誤（Xcom）
 * 以`python dags/commic_app_v2.py`確保DAG定義無誤
-* 利用Airflow tasks test指令分別測試每個Airflow工作執行如預期
+* 利用airflow tasks test指令分別測試每個Airflow工作執行如預期
 * 使用Web UI點擊「Trigger Dag」按鈕或是透過airflow trigger來手動觸發DAG確認結果
 
 ## 注意事項
